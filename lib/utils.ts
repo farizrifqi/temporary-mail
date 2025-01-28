@@ -12,7 +12,7 @@ export function randomMail() {
 
 export function mailTime(date: Date) {
   const currentTime = moment();
-  const day = 1 * 60 * 60 * 1;
+  const day = 1 * 60 * 60 * 24;
   const isPassed = currentTime.unix() - new Date(date).getTime() / 1000 <= day;
   return isPassed
     ? moment(date).fromNow()

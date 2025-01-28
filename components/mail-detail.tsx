@@ -11,6 +11,7 @@ import { Envelope } from "@/lib/types";
 import { toast } from "sonner";
 import { mailTime } from "@/lib/utils";
 
+//TODO
 const loadingHtml = `<style>.lds-ellipsis{display:inline-block;position:relative;width:76px;height:50px}.lds-ellipsis div{position:absolute;top:20px;width:13px;height:13px;border-radius:50%;animation-timing-function:cubic-bezier(0,1,1,0)}.lds-ellipsis div:nth-child(1){left:8px;animation:lds-ellipsis1 0.6s infinite}.lds-ellipsis div:nth-child(2){left:8px;animation:lds-ellipsis2 0.6s infinite}.lds-ellipsis div:nth-child(3){left:32px;animation:lds-ellipsis2 0.6s infinite}.lds-ellipsis div:nth-child(4){left:56px;animation:lds-ellipsis3 0.6s infinite}@keyframes lds-ellipsis1{0%{transform:scale(0)}100%{transform:scale(1)}}@keyframes lds-ellipsis3{0%{transform:scale(1)}100%{transform:scale(0)}}@keyframes lds-ellipsis2{0%{transform:translate(0,0)}100%{transform:translate(24px,0)}}</style>
 <div class="h-full flex justify-center items-center">
   <div class="lds-ellipsis [&>div]:bg-primary/90"><div></div><div></div><div></div><div></div></div>
@@ -56,7 +57,7 @@ function MailDetail({
     <Dialog onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="max-w-4xl">
-        <DialogHeader>
+        <DialogHeader className="adfasf h-fit">
           <DialogTitle>{envelope.subject}</DialogTitle>
           <DialogDescription className="flex flex-col justify-between sm:flex-row">
             <span>
@@ -67,7 +68,7 @@ function MailDetail({
         </DialogHeader>
         <div
           dangerouslySetInnerHTML={html}
-          className="max-h-[70vh] min-h-[108px] overflow-auto border-t pt-4"
+          className="max-h-[70vh] min-h-[400px] overflow-auto border-t pt-4"
         />
       </DialogContent>
     </Dialog>
