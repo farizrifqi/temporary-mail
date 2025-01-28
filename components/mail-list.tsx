@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import { useEnvelope } from "@/lib/store/envelope";
-import { fmtLocaleTime } from "@/lib/utils";
 import MailDetail from "@/components/mail-detail";
 import { DELIMITER } from "@/lib/constant";
-import { Howl, Howler } from "howler";
+import { Howl } from "howler";
 import { toast } from "sonner";
+import { mailTime } from "@/lib/utils";
 
 function MailList() {
   const [envelope, admin] = useEnvelope((state) => [state.list, state.admin]);
@@ -36,7 +36,7 @@ function MailList() {
     <div className="flex flex-1 flex-col overflow-auto">
       {envelope.map((value) => (
         <MailDetail key={value.key} envelope={value}>
-          <div className="border-b px-4 py-3 hover:bg-secondary">
+          <div className="cursor-pointer border-b px-4 py-3 hover:bg-secondary">
             <div className="flex items-center justify-between">
               <span className="font-medium">{value.subject}</span>
               {admin && (
@@ -45,11 +45,9 @@ function MailList() {
                 </span>
               )}
             </div>
-            <div className="flex cursor-pointer items-center justify-between text-muted-foreground">
+            <div className="flex items-center justify-between text-muted-foreground">
               <span>{value.fromName}</span>
-              <span className="text-sm">
-                {fmtLocaleTime(new Date(value.date))}
-              </span>
+              <span className="text-sm">{mailTime(value.date)}</span>
             </div>
           </div>
         </MailDetail>

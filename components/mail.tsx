@@ -1,6 +1,5 @@
 import React from "react";
 import MailTitle from "@/components/mail-title";
-import MailRefresh from "@/components/mail-refresh";
 import MailList from "@/components/mail-list";
 
 function Mail() {
@@ -10,7 +9,6 @@ function Mail() {
         <div className="flex flex-wrap items-center gap-2">
           <MailTitle />
           <span className="flex-1" />
-          <MailRefresh />
         </div>
       </div>
       <MailList />

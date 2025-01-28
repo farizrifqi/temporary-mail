@@ -15,6 +15,7 @@ import { useStoreWithEqualityFn } from "zustand/traditional";
 import { configServerStore } from "@/lib/store/config-server";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import MailRefresh from "./mail-refresh";
 
 function Actions() {
   const t = useTranslations();
@@ -111,7 +112,7 @@ function Actions() {
 
   const [edited, setEdited] = useState(false);
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    <div className="flex flex-wrap items-start gap-2 lg:items-center">
       <div className="flex h-9 items-center gap-1">
         <Mounted fallback={<Skeleton className="h-8 w-28" />}>
           <Input
@@ -128,7 +129,7 @@ function Actions() {
             setValue={(domain) => setDomain(domain)}
             list={configServer.domain}
             disabled={!edited}
-            className="w-[118px] px-2"
+            className="w-[148px] px-2"
           />
         </Mounted>
       </div>
@@ -155,6 +156,7 @@ function Actions() {
           {t("history")}
         </Button>
       </MailHistory>
+      <MailRefresh />
     </div>
   );
 }

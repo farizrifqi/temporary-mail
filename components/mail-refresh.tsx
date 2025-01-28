@@ -80,21 +80,22 @@ function MailRefresh() {
   }
 
   return (
-    <>
-      {loading ? (
-        <RefreshCw size={20} className="mr-6 animate-spin" />
-      ) : (
-        <Button variant="outline" onClick={onRefresh}>
-          <RefreshCw size={16} className="mr-1" />
-          {t("refresh")}
-        </Button>
-      )}
-      <span className="self-end pb-0.5 text-sm text-muted-foreground">
+    <div className="flex h-full flex-col gap-2 lg:flex-row lg:items-center">
+      <Button variant="outline" onClick={onRefresh}>
+        <RefreshCw
+          size={16}
+          data-loading={loading}
+          className="mr-1 data-[loading=true]:animate-spin"
+        />
+
+        {t("refresh")}
+      </Button>
+      <span className="pb-0.5 text-sm text-muted-foreground">
         {t("refreshB")}
         <span className="font-medium">{REFRESH_SECONDS - seconds}s</span>
         {t("refreshA")}
       </span>
-    </>
+    </div>
   );
 }
 
