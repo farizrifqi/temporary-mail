@@ -6,8 +6,10 @@ import { DELIMITER } from "@/lib/constant";
 import { Howl } from "howler";
 import { toast } from "sonner";
 import { mailTime } from "@/lib/utils";
+import { useConfig } from "@/lib/store/config";
 
 function MailList() {
+  const { update } = useConfig();
   const [envelope, admin] = useEnvelope((state) => [state.list, state.admin]);
   const prevLengthRef = useRef(-1);
   const [initialized, setInitialized] = useState(false);
@@ -31,6 +33,13 @@ function MailList() {
     }
     prevLengthRef.current = envelope.length;
   }, [envelope]);
+
+  useEffect(() => {
+    if (initialized) {
+      setInitialized(false);
+      prevLengthRef.current = -1;
+    }
+  }, [update]);
 
   return (
     <div className="flex flex-1 flex-col overflow-auto">
