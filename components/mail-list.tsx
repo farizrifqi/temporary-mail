@@ -1,12 +1,36 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useEnvelope } from "@/lib/store/envelope";
 import { fmtLocaleTime } from "@/lib/utils";
 import MailDetail from "@/components/mail-detail";
 import { DELIMITER } from "@/lib/constant";
+import { Howl, Howler } from "howler";
+import { toast } from "sonner";
 
 function MailList() {
   const [envelope, admin] = useEnvelope((state) => [state.list, state.admin]);
+  const prevLengthRef = useRef(-1);
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    if (
+      initialized &&
+      prevLengthRef.current !== -1 &&
+      envelope.length !== prevLengthRef.current
+    ) {
+      new Howl({
+        src: ["/tone.wav"],
+        html5: false,
+        volume: 0.7,
+        preload: true,
+      }).play();
+      toast.success("A new email delivered!");
+    }
+    if (!initialized && prevLengthRef.current > -1) {
+      setInitialized(true);
+    }
+    prevLengthRef.current = envelope.length;
+  }, [envelope]);
 
   return (
     <div className="flex flex-1 flex-col overflow-auto">
@@ -21,7 +45,7 @@ function MailList() {
                 </span>
               )}
             </div>
-            <div className="flex items-center justify-between text-muted-foreground">
+            <div className="flex cursor-pointer items-center justify-between text-muted-foreground">
               <span>{value.fromName}</span>
               <span className="text-sm">
                 {fmtLocaleTime(new Date(value.date))}
